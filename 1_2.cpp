@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 #define LIST_INIT_SIZE 100
 #define LISTINCREMENT 10
@@ -10,23 +11,23 @@ struct SqList
 	int listsize;
 };
 void InitList_Sq(SqList &L) {
-	L.elem = (int *)malloc(LIST_INIT_SIZE * sizeof(int));
-	if (!L.elem)	exit(0);
+	L.elem = new int[LIST_INIT_SIZE];
+	if (!L.elem)	return;
 	L.length = 0;
 	L.listsize = LIST_INIT_SIZE;
 }
 void CreateList_Sq(SqList &L) {
 	int n;
-	cout << "输入元素个数：";
+	cout << "Please input number:";
 	cin >> n;
-	cout << "随机创建线性表..." << endl;
+	cout << "..." << endl;
 	for (int i = 0; i<n; i++)
 		L.elem[i] = rand()%100;
 	L.length = n;
 }
 void DestroyList_Sq(SqList &L)
 {
-	free(L.elem);
+	delete []L.elem;
 }
 void Inverse_Sq(SqList &L) {
 	for (int i = 0; i<L.length / 2; i++)
@@ -41,13 +42,13 @@ int main() {
 	SqList L;
 	InitList_Sq(L);
 	CreateList_Sq(L);
-	cout << "转置前：" << endl;
+	cout << "111" << endl;
 	ListTraverse_Sq(L);
 	Inverse_Sq(L);
-	cout << "转置后：" << endl;
+	cout << "222" << endl;
 	ListTraverse_Sq(L);
 
 	DestroyList_Sq(L);
-	system("pause");
+	
 	return 0;
 }
